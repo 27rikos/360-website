@@ -40,7 +40,15 @@
                                     </div>
                                 </div>
                             </div>
-                            <form action="#!">
+                            @if ($message = Session::get('error'))
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    {{ $message }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+                            @endif
+                            <form action="{{ route('auth') }}" method="POST">
+                                @csrf
                                 <div class="row gy-3 overflow-hidden">
                                     <div class="col-12">
                                         <div class="form-floating mb-3">
