@@ -31,6 +31,13 @@
             font-feature-settings: "cv03", "cv04", "cv11";
         }
     </style>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://cdn.datatables.net/2.1.5/js/dataTables.js"></script>
+    <script src="https://cdn.datatables.net/2.1.5/js/dataTables.bootstrap5.js"></script>
+    <script src="https://cdn.datatables.net/responsive/3.0.3/js/dataTables.responsive.js"></script>
+    <script src="https://cdn.datatables.net/responsive/3.0.3/js/responsive.bootstrap5.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.5/css/dataTables.bootstrap5.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/3.0.3/css/responsive.bootstrap5.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
 </head>
 
@@ -81,12 +88,12 @@
                             <span class="avatar avatar-sm"
                                 style="background-image: url({{ asset('./static/avatars/000m.jpg') }})"></span>
                             <div class="d-none d-xl-block ps-2">
-                                <div>Paweł Kuna</div>
+                                <div>{{ Auth::user()->name }}</div>
                                 <div class="mt-1 small text-secondary">Admin</div>
                             </div>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                            <a href="./sign-in.html" class="dropdown-item">Logout</a>
+                            <a href="{{ route('logout') }}" class="dropdown-item">Logout</a>
                         </div>
                     </div>
                 </div>
@@ -119,8 +126,8 @@
                                     </span>
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="./">
+                            <li class="nav-item {{ request()->routeIs('kriteria.index') ? 'active' : '' }}">
+                                <a class="nav-link" href="{{ route('kriteria.index') }}">
                                     <span
                                         class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
                                         <i class="ti ti-ruler-measure-2 fs-2"></i>
@@ -130,8 +137,8 @@
                                     </span>
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="./">
+                            <li class="nav-item {{ request()->routeIs('analisis.index') ? 'active' : '' }}">
+                                <a class="nav-link" href="{{ route('analisis.index') }}">
                                     <span
                                         class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
                                         <i class="ti ti-presentation-analytics fs-2"></i>
@@ -199,6 +206,7 @@
             </footer>
         </div>
     </div>
+
     <script src="{{ asset('./dist/libs/apexcharts/dist/apexcharts.min.js?1692870487') }}" defer></script>
     <script src="{{ asset('./dist/libs/jsvectormap/dist/js/jsvectormap.min.js?1692870487') }}" defer></script>
     <script src="{{ asset('./dist/libs/jsvectormap/dist/maps/world.js?1692870487') }}" defer></script>
@@ -207,6 +215,12 @@
     <script src="{{ asset('./dist/js/tabler.min.js?1692870487') }}" defer></script>
     <script src="{{ asset('./dist/js/demo.min.js?1692870487') }}" defer></script>
     <script src="{{ asset('./dist/libs/tinymce/tinymce.min.js?1692870487') }}" defer></script>
+    <script>
+        new DataTable('#example', {
+            responsive: true
+        });
+    </script>
+    @stack('analyze')
 </body>
 
 </html>

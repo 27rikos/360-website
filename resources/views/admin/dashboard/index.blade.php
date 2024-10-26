@@ -38,11 +38,7 @@
                                         </div>
                                         <div class="col">
                                             <div class="font-weight-medium">
-                                                132 Responden
-                                            </div>
-                                            <div class="text-secondary d-flex justify-content-between mt-2">
-                                                <p>Detail</p>
-                                                <i class="ti ti-arrow-right pt-2"></i>
+                                                {{ $respon }} Responden
                                             </div>
                                         </div>
                                     </div>
@@ -60,11 +56,7 @@
                                         </div>
                                         <div class="col">
                                             <div class="font-weight-medium">
-                                                78 kriteria
-                                            </div>
-                                            <div class="text-secondary d-flex justify-content-between mt-2">
-                                                <p>Detail</p>
-                                                <i class="ti ti-arrow-right pt-2"></i>
+                                                {{ $kriteria }} kriteria
                                             </div>
                                         </div>
                                     </div>
