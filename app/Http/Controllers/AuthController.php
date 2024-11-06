@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -25,6 +28,33 @@ class AuthController extends Controller
             return redirect()->intended('dashboard');
         }
         return back()->with('error', 'Login failed');
+    }
+
+    public function register()
+    {
+        return view('auth.register');
+    }
+
+    public function accept(Request $request)
+    {
+        try {
+            $this->validate($request, [
+                'name' => 'required',
+                'email' => 'required|email',
+                'password' => 'required',
+            ]);
+            $hashedPassword = Hash::make($request->password);
+            $data = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => $hashedPassword,
+            ]);
+            $data->save();
+            return redirect()->route('login')->with('success', 'Akun Berhasil Didaftarkan');
+        } catch (Exception $e) {
+            return redirect()->route('register')->with('error', 'Akun Gagal Didaftarkan');
+        }
+
     }
 
     public function logout(Request $request)

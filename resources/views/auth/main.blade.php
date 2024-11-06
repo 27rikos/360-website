@@ -37,9 +37,18 @@
                                 <div class="col-12">
                                     <div class="mb-4">
                                         <h3>Sign in</h3>
+                                        <p>Belum punya akun? daftar <a href="{{ route('register') }}">disini</a></p>
                                     </div>
                                 </div>
                             </div>
+                            @if ($message = Session::get('success'))
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    {{ $message }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+                            @endif
+
                             @if ($message = Session::get('error'))
                                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
                                     {{ $message }}
