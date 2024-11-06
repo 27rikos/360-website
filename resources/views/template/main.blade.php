@@ -89,7 +89,7 @@
                                 style="background-image: url({{ asset('./static/avatars/000m.jpg') }})"></span>
                             <div class="d-none d-xl-block ps-2">
                                 <div>{{ Auth::user()->name }}</div>
-                                <div class="mt-1 small text-secondary">Admin</div>
+                                <div class="mt-1 small text-secondary">{{ Auth::user()->role }}</div>
                             </div>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
@@ -104,10 +104,10 @@
                 <div class="navbar">
                     <div class="container-xl">
                         <ul class="navbar-nav">
-                            <li class="nav-item {{ request()->routeIs('dashboard') ? 'active' : '' }} ">
+                            <!-- Dashboard Menu -->
+                            <li class="nav-item {{ request()->routeIs('dashboard') ? 'active' : '' }}">
                                 <a class="nav-link" href="{{ route('dashboard') }}">
-                                    <span
-                                        class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
+                                    <span class="nav-link-icon d-md-none d-lg-inline-block">
                                         <i class="ti ti-dashboard fs-2"></i>
                                     </span>
                                     <span class="nav-link-title">
@@ -115,45 +115,68 @@
                                     </span>
                                 </a>
                             </li>
-                            <li class="nav-item {{ request()->routeIs('respon.index') ? 'active' : '' }} ">
-                                <a class="nav-link" href="{{ route('respon.index') }}">
-                                    <span
-                                        class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
-                                        <i class="ti ti-users fs-2"></i>
+
+                            <!-- Formulir Kuisioner Menu, visible to all roles -->
+                            <li class="nav-item {{ request()->routeIs('quiz.index') ? 'active' : '' }}">
+                                <a class="nav-link" href="{{ route('quiz.index') }}">
+                                    <span class="nav-link-icon d-md-none d-lg-inline-block">
+                                        <i class="ti ti-list-details fs-2"></i>
                                     </span>
                                     <span class="nav-link-title">
-                                        Responden
-                                    </span>
-                                </a>
-                            </li>
-                            <li class="nav-item {{ request()->routeIs('kriteria.index') ? 'active' : '' }}">
-                                <a class="nav-link" href="{{ route('kriteria.index') }}">
-                                    <span
-                                        class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
-                                        <i class="ti ti-ruler-measure-2 fs-2"></i>
-                                    </span>
-                                    <span class="nav-link-title">
-                                        Kriteria
-                                    </span>
-                                </a>
-                            </li>
-                            <li class="nav-item {{ request()->routeIs('analisis.index') ? 'active' : '' }}">
-                                <a class="nav-link" href="{{ route('analisis.index') }}">
-                                    <span
-                                        class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
-                                        <i class="ti ti-presentation-analytics fs-2"></i>
-                                    </span>
-                                    <span class="nav-link-title">
-                                        Hasil Analisis
+                                        Formulir Kuisioner
                                     </span>
                                 </a>
                             </li>
 
+                            <!-- Menu hanya untuk Admin -->
+                            @if (auth()->user()->hasRole('admin'))
+                                <li class="nav-item {{ request()->routeIs('kuisioner.index') ? 'active' : '' }}">
+                                    <a class="nav-link" href="{{ route('kuisioner.index') }}">
+                                        <span class="nav-link-icon d-md-none d-lg-inline-block">
+                                            <i class="ti ti-message-question fs-2"></i>
+                                        </span>
+                                        <span class="nav-link-title">
+                                            Kuisioner
+                                        </span>
+                                    </a>
+                                </li>
+                                <li class="nav-item {{ request()->routeIs('respon.index') ? 'active' : '' }}">
+                                    <a class="nav-link" href="{{ route('respon.index') }}">
+                                        <span class="nav-link-icon d-md-none d-lg-inline-block">
+                                            <i class="ti ti-users fs-2"></i>
+                                        </span>
+                                        <span class="nav-link-title">
+                                            Responden
+                                        </span>
+                                    </a>
+                                </li>
+                                <li class="nav-item {{ request()->routeIs('kriteria.index') ? 'active' : '' }}">
+                                    <a class="nav-link" href="{{ route('kriteria.index') }}">
+                                        <span class="nav-link-icon d-md-none d-lg-inline-block">
+                                            <i class="ti ti-ruler-measure-2 fs-2"></i>
+                                        </span>
+                                        <span class="nav-link-title">
+                                            Kriteria
+                                        </span>
+                                    </a>
+                                </li>
+                                <li class="nav-item {{ request()->routeIs('analisis.index') ? 'active' : '' }}">
+                                    <a class="nav-link" href="{{ route('analisis.index') }}">
+                                        <span class="nav-link-icon d-md-none d-lg-inline-block">
+                                            <i class="ti ti-presentation-analytics fs-2"></i>
+                                        </span>
+                                        <span class="nav-link-title">
+                                            Hasil Analisis
+                                        </span>
+                                    </a>
+                                </li>
+                            @endif
                         </ul>
                     </div>
                 </div>
             </div>
         </header>
+
         <div class="page-wrapper">
             <!-- Page header -->
             <!-- Page body -->
