@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KriteriaController;
 use App\Http\Controllers\KuisionerController;
+use App\Http\Controllers\PdfController;
 use App\Http\Controllers\QuizController;
 use App\Http\Controllers\ResponController;
 use Illuminate\Support\Facades\Route;
@@ -43,4 +44,5 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('import-kuisioner', [KuisionerController::class, 'import'])->name('import-kuisioner');
     Route::get('show-quis', [QuizController::class, 'index'])->name('quiz.index');
     Route::post('quis-save', [QuizController::class, 'store'])->name('quiz.store');
+    Route::get('print', [PdfController::class, 'print'])->name('report');
 });

@@ -35,9 +35,10 @@
                 </div>
             @endif
             <div class="card">
-                <div class="card-header">
+                <div class="card-header gap-3">
                     <a href="{{ route('analisis.store') }}" class="btn btn-info"><i
                             class="ti ti-analyze fs-2 me-2"></i>Analyze</a>
+                    <a href="{{ route('report') }}" class=" btn btn-danger"> <i class="ti ti-pdf fs-2 me-2"></i>Report</a>
                 </div>
                 <div class="card-body">
                     <table id="dataTable" class="table table-bordered table-hover">
